@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<--ใส่ action /login เพื่อให้urlเปลี่ยน ใส่ postเพื่อไม่โชว์ข้อมูลบน url -->
+    <form id="login-from" action="/auth/login" method="post">
+        <input type="text" id="email" name="email">
+        <input type="password" id="password" name="password">
+
+        <input type="submit" id="submit-button">
+    </form>
+{% endblock %}

@@ -5,20 +5,20 @@ from src.common.database import Database
 from src.models.post import Post
 
 
-class Blof(object):
-    def __init__(self, author, title, decription, _id=None):
+class Blog(object):
+    def __init__(self,author,title,description,author_id,
+                 _id=None):
         self.author = author
+        self.author_id = author_id
         self.title = title
-        self.decription = decription
+        self.description = description
         self._id = uuid.uuid4().hex if _id is None else _id
 
     def new_post(self,title,content,
                  date = datetime.datetime.utcnow()):
-        title = input("Enter post title: ")
-        content = input("Enter post content: ")
-        date = input("Enter post data,or leave blank for today")
-
-
+        # title = input("Enter post title: ")
+        # content = input("Enter post content: ")
+        # date = input("Enter post data,or leave blank for today")
 
         post = Post(blog_id=self._id,
                     title=title,
@@ -37,8 +37,9 @@ class Blof(object):
     def json(self):
         return {
             'author':self.author,
+            'author_id':self.author_id,
             'title':self.title,
-            'description':self.decription,
+            'description':self.description,
             '_id':self._id
         }
 
@@ -47,7 +48,14 @@ class Blof(object):
         blog_data = Database.find_one(colllection='blogs',
                                       query={'_id':id})
         return cls(**blog_data)
-        # return cls(author=blog_data['author'],
-        #            title=blog_data['title'],
-        #            decription=blog_data['description'],
-        #            _id = blog_data['_id'])
+    # return cls(author=blog_data['author'],
+    #            title=blog_data['title'],
+    #            decription=blog_data['description'],
+    #            _id = blog_data['_id'])
+
+    @classmethod
+    def find_by_author_id(cls,author_id):
+        blogs = Database.find(collection='blogs',
+                            query={'author_id':author_id})
+        return [cls(**blog) for blog in blogs]
+
