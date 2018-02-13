@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<--ใส่ action /login เพื่อให้urlเปลี่ยน ใส่ postเพื่อไม่โชว์ข้อมูลบน url -->
+<div class="container login-page-form">
     <form id="login-from" action="/auth/login" method="post">
-        <input type="text" id="email" name="email">
-        <input type="password" id="password" name="password">
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type="text" id="email" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" id="password" class="form-control" name="password">
+        </div>
 
-        <input type="submit" id="submit-button">
+        <button type="submit" class="btn btn-primary">Log in</button>
     </form>
+</div>
 {% endblock %}
