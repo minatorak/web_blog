@@ -86,6 +86,7 @@ def delete_task(task_id):
         abort(404)
     tasks.remove(task[0])
     return jsonify({'result': True})
+    # curl -i -H "Content-Type: application/json" -X DELETE -d '' http://localhost:5000/todo/api/v1.0/tasks/2
 
 
 
@@ -94,4 +95,4 @@ def index():
     return "Hello, World!"
 
 if __name__ == '__main__':
-    app.run(port=4995,debug=True)
+    app.run(port=5000,debug=True)
