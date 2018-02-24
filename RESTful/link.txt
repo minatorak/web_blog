@@ -1,0 +1,40 @@
+
+https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
+
+GET Obtain information about a resource
+http://example.com/api/orders
+(retrieve order list)
+
+GET Obtain information about a resource
+http://example.com/api/orders/123
+(retrieve order #123)
+
+POST Create a new resource
+http://example.com/api/orders
+(create a new order, from data provided with the request)
+
+
+PUT Update a resource
+http://example.com/api/orders/123
+(update order #123, from data provided with the request)
+
+
+DELETE Delete a resource
+http://example.com/api/orders/123
+(delete order #123)
+
+------------------------------------------------
+GET http://[hostname]/todo/api/v1.0/tasks
+    Retrieve list of tasks
+
+GET http://[hostname]/todo/api/v1.0/tasks/[task_id]
+    Retrieve a task
+
+POST http://[hostname]/todo/api/v1.0/tasks
+    Create a new task
+
+PUT http://[hostname]/todo/api/v1.0/tasks/[task_id]
+    Update an existing task
+
+DELETE http://[hostname]/todo/api/v1.0/tasks/[task_id]
+    Delete a task
