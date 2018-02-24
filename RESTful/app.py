@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, abort
+from flask import Flask, jsonify, abort, make_response, request
 
 app = Flask(__name__)
 
@@ -32,6 +32,13 @@ def get_task(task_id):
         abort(404)
         # return error page
     return jsonify({'task': task[0]})
+
+@app.errorhandler(404)
+def not_found(error):
+    # make error page form line 33 to json error
+    # curl -i http://localhost:5000/todo/api/v1.0/tasks/3
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
 
 @app.route('/')
 def index():
