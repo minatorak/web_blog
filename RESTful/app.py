@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, abort, make_response, request
+from flask import Flask, jsonify, abort, make_response, request, url_for
 from pip._vendor.appdirs import unicode
 
 app = Flask(__name__)
@@ -18,9 +18,9 @@ tasks = [
     }
 ]
 
-@app.route('/todo/api/v1.0/tasks', methods=['GET'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
+# @app.route('/todo/api/v1.0/tasks', methods=['GET'])
+# def get_tasks():
+#     return jsonify({'tasks': tasks})
     # curl -i http://localhost:5000/todo/api/v1.0/tasks
     # function generates for us from our data structure
 
@@ -89,6 +89,19 @@ def delete_task(task_id):
     # curl -i -H "Content-Type: application/json" -X DELETE -d '' http://localhost:5000/todo/api/v1.0/tasks/2
 
 
+def make_public_task(task):
+    new_task = {}
+    for field in task:
+        if field == 'id':
+            new_task['uri'] = url_for('get_task', task_id=task['id'], _external=True)
+        else:
+            new_task[field] = task[field]
+    return new_task
+
+
+@app.route('/todo/api/v1.0/tasks', methods=['GET'])
+def get_tasks():
+    return jsonify({'tasks': [make_public_task(task) for task in tasks]})
 
 @app.route('/')
 def index():
